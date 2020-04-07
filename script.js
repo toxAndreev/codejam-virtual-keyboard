@@ -164,22 +164,27 @@ let ENG_layout = ["`","1","2","3","4","5","6","7","8","9","0","Backspace",
             "Shift","z","x","c","v","b","n","m",",",".","/","Up","LANG",
 			"Ctrl","Win","Alt"," ","Left","Down","Right"];	
 	if(b[13].innerText == "q" || b[13].innerText == "Q") {
-		for(let i = 0; i < b.length; i++){
+		for(let i = 0; i < b.length; i++) {
 			b[i].innerText = Rus_layout[i];
 		}		
 	}
 		else {
-			for(let i = 0; i < b.length; i++){
+			for(let i = 0; i < b.length; i++) {
 			b[i].innerText = ENG_layout[i];
 		}		
 		}
 }
 
 function LangIconChange(){
-	let x = document.getElementById("LANG-btn");
 	
-	if(x.style.background == "url(assets/uk.svg) no-repeat")
-		x.style.background == "url(assets/rus.svg) no-repeat";
-		else 
-			x.style.background == "url(assets/uk.svg) no-repeat";
+	var x = document.getElementById("LANG-btn");
+	if(b[13].innerText == "й" || b[13].innerText == "Й") {
+		x.style.background = "url(assets/rus.jpg)"
+		x.style.backgroundSize = "contain";
+	}
+		else {
+			x.style.background = "url(assets/uk.svg)"
+			x.style.backgroundSize = "cover";
+			x.style.backgroundPosition = "center";
+		}
 }

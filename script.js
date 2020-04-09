@@ -77,7 +77,7 @@ m.style.color = "black";
 		textarea.innerHTML = str.slice(0,-2) + str.slice(-1);	
 	if(n == "Tab")	
 		textarea.innerHTML +="   ";
-	if(n == "Space")	
+	if(n == "")	
 		textarea.innerHTML +=" ";
 	if(n == "Enter")	
 		textarea.innerHTML +="\n";
@@ -119,7 +119,7 @@ let str = textarea.innerHTML;
 		textarea.innerHTML = str.slice(0,-2) + str.slice(-1);	
 	if(n == "Tab")	
 		textarea.innerHTML +="   ";
-	 if(n == " ")	
+	 if(n == "")	
 		textarea.innerHTML +=" ";
 	if(n == "Enter")	
 		textarea.innerHTML +="\n";

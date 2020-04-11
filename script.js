@@ -9,6 +9,10 @@ textarea.className = "textarea-container";
 textarea.id = "textarea-container";
 main.prepend(textarea);
 document.getElementById("textarea-container").autofocus = true;
+
+let h3 = document.createElement('h3');
+h3.innerHTML = "To change language press CTRL + SHIFT";
+textarea.after(h3);
 //KEYBOARD CONTAINER
 let keyboard = document.createElement('div');
 keyboard.className = "keyboard-container";
@@ -66,10 +70,17 @@ let x = event.code;
 let y = x.indexOf('Key');
 let z = x.indexOf('Digit');
 let n = event.key;
-let m = document.getElementById(n + "-btn");
-let str = textarea.innerHTML;	
+let k = event.code;
+let m, ID;
+
+ID = (n.length < 2 && n != " " && n != "`")? (k.slice(-1).toLowerCase() + "-btn"):(n + "-btn");
+m = document.getElementById(ID);		 
 m.style.background = "yellow";
-m.style.color = "black";
+m.style.color = "black";		 
+	
+
+let str = textarea.innerHTML;	
+
 
 	if(n == "Backspace")
 		textarea.innerHTML = str.slice(0,-1);
@@ -83,7 +94,7 @@ m.style.color = "black";
 		textarea.innerHTML +="\n";
 	if(n == "CapsLock")
 		CapsLock();
-	if(n == "LANG"){
+	if(document.getElementById("Control-btn").style.background == "yellow" && document.getElementById("Shift-btn").style.background == "yellow"){
 		LangChange();
 		LangIconChange();
 	}	
@@ -100,12 +111,39 @@ m.style.color = "black";
 });
 
 document.addEventListener('keyup', function(event) {
-	let x = event.key;
-	let y = document.getElementById(x + "-btn");
+	let n = event.key;
+	let k = event.code;
+	let ID;
+
+	ID = (n.length < 2 && n != " " && n != "`")? (k.slice(-1).toLowerCase() + "-btn"):(n + "-btn");
+	
+	let y = document.getElementById(ID);
 	y.style.background = "#348de6";
 	y.style.color = "white";
-});	
 	
+});	
+
+
+keyboard.addEventListener("mouseover", e => {
+	
+	let x = event.target;
+	if(x.tagName == "BUTTON"){
+	x.style.background = "yellow";
+	x.style.color = "black";
+	console.log(x.tagName);
+	}	
+})
+
+keyboard.addEventListener("mouseout", e => {
+	console.log(event.target);
+	let x = event.target;
+	if(x.tagName == "BUTTON"){
+	x.style.background = "#348de6";
+	x.style.color = "white";	
+
+	}
+})
+
 //INPUT DATA FROM VIRTUAL KEYBOARD
  document.addEventListener('click', function(event) {
 let n = event.target.innerText;
@@ -119,7 +157,7 @@ let str = textarea.innerHTML;
 		textarea.innerHTML = str.slice(0,-2) + str.slice(-1);	
 	if(n == "Tab")	
 		textarea.innerHTML +="   ";
-	 if(n == "")	
+	if(n == "")	
 		textarea.innerHTML +=" ";
 	if(n == "Enter")	
 		textarea.innerHTML +="\n";

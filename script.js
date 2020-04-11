@@ -9,6 +9,10 @@ textarea.className = "textarea-container";
 textarea.id = "textarea-container";
 main.prepend(textarea);
 document.getElementById("textarea-container").autofocus = true;
+
+let h3 = document.createElement('h3');
+h3.innerHTML = "To change language press CTRL + SHIFT";
+textarea.after(h3);
 //KEYBOARD CONTAINER
 let keyboard = document.createElement('div');
 keyboard.className = "keyboard-container";
@@ -66,10 +70,17 @@ let x = event.code;
 let y = x.indexOf('Key');
 let z = x.indexOf('Digit');
 let n = event.key;
-let m = document.getElementById(n + "-btn");
-let str = textarea.innerHTML;	
+let k = event.code;
+let m, ID;
+
+ID = (n.length < 2 && n != " " && n != "`")? (k.slice(-1).toLowerCase() + "-btn"):(n + "-btn");
+m = document.getElementById(ID);		 
 m.style.background = "yellow";
-m.style.color = "black";
+m.style.color = "black";		 
+	
+
+let str = textarea.innerHTML;	
+
 
 	if(n == "Backspace")
 		textarea.innerHTML = str.slice(0,-1);
@@ -77,11 +88,13 @@ m.style.color = "black";
 		textarea.innerHTML = str.slice(0,-2) + str.slice(-1);	
 	if(n == "Tab")	
 		textarea.innerHTML +="   ";
+	if(n == " ")	
+		textarea.innerHTML +=" ";
 	if(n == "Enter")	
 		textarea.innerHTML +="\n";
 	if(n == "CapsLock")
 		CapsLock();
-	if(n == "LANG"){
+	if(document.getElementById("Control-btn").style.background == "yellow" && document.getElementById("Shift-btn").style.background == "yellow"){
 		LangChange();
 		LangIconChange();
 	}	
@@ -98,12 +111,39 @@ m.style.color = "black";
 });
 
 document.addEventListener('keyup', function(event) {
-	let x = event.key;
-	let y = document.getElementById(x + "-btn");
+	let n = event.key;
+	let k = event.code;
+	let ID;
+
+	ID = (n.length < 2 && n != " " && n != "`")? (k.slice(-1).toLowerCase() + "-btn"):(n + "-btn");
+	
+	let y = document.getElementById(ID);
 	y.style.background = "#348de6";
 	y.style.color = "white";
-});	
 	
+});	
+
+
+keyboard.addEventListener("mouseover", e => {
+	
+	let x = event.target;
+	if(x.tagName == "BUTTON"){
+	x.style.background = "yellow";
+	x.style.color = "black";
+	console.log(x.tagName);
+	}	
+})
+
+keyboard.addEventListener("mouseout", e => {
+	console.log(event.target);
+	let x = event.target;
+	if(x.tagName == "BUTTON"){
+	x.style.background = "#348de6";
+	x.style.color = "white";	
+
+	}
+})
+
 //INPUT DATA FROM VIRTUAL KEYBOARD
  document.addEventListener('click', function(event) {
 let n = event.target.innerText;
@@ -117,6 +157,8 @@ let str = textarea.innerHTML;
 		textarea.innerHTML = str.slice(0,-2) + str.slice(-1);	
 	if(n == "Tab")	
 		textarea.innerHTML +="   ";
+	if(n == "")	
+		textarea.innerHTML +=" ";
 	if(n == "Enter")	
 		textarea.innerHTML +="\n";
 	if(n == "CapsLock")
@@ -164,22 +206,27 @@ let ENG_layout = ["`","1","2","3","4","5","6","7","8","9","0","Backspace",
             "Shift","z","x","c","v","b","n","m",",",".","/","Up","LANG",
 			"Ctrl","Win","Alt"," ","Left","Down","Right"];	
 	if(b[13].innerText == "q" || b[13].innerText == "Q") {
-		for(let i = 0; i < b.length; i++){
+		for(let i = 0; i < b.length; i++) {
 			b[i].innerText = Rus_layout[i];
 		}		
 	}
 		else {
-			for(let i = 0; i < b.length; i++){
+			for(let i = 0; i < b.length; i++) {
 			b[i].innerText = ENG_layout[i];
 		}		
 		}
 }
 
 function LangIconChange(){
-	let x = document.getElementById("LANG-btn");
 	
-	if(x.style.background == "url(assets/uk.svg) no-repeat")
-		x.style.background == "url(assets/rus.svg) no-repeat";
-		else 
-			x.style.background == "url(assets/uk.svg) no-repeat";
+	var x = document.getElementById("LANG-btn");
+	if(b[13].innerText == "й" || b[13].innerText == "Й") {
+		x.style.background = "url(assets/rus.jpg)"
+		x.style.backgroundSize = "contain";
+	}
+		else {
+			x.style.background = "url(assets/uk.svg)"
+			x.style.backgroundSize = "cover";
+			x.style.backgroundPosition = "center";
+		}
 }

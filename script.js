@@ -127,7 +127,7 @@ document.addEventListener('keyup', function(event) {
 keyboard.addEventListener("mouseover", e => {
 	
 	let x = event.target;
-	if(x.tagName == "BUTTON"){
+	if(x.tagName == "BUTTON" && x.id != "LANG-btn"){
 	x.style.background = "yellow";
 	x.style.color = "black";
 	console.log(x.tagName);
@@ -137,7 +137,7 @@ keyboard.addEventListener("mouseover", e => {
 keyboard.addEventListener("mouseout", e => {
 	console.log(event.target);
 	let x = event.target;
-	if(x.tagName == "BUTTON"){
+	if(x.tagName == "BUTTON" && x.id != "LANG-btn") {
 	x.style.background = "#348de6";
 	x.style.color = "white";	
 
